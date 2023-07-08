@@ -1,0 +1,24 @@
+services:
+
+  my-springmusic:
+    image: my-springmusic
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      # explicit profile required so that datasource is recognized and non-local
+      - SPRING_PROFILES_ACTIVE=mongodb,remote
+      # standard spring data property
+      - spring.data.mongodb.uri=mongodb://admin:admin@my-mongodb:27017/test
+    volumes:
+      - javatmp:/tmp
+    networks:
+      - dockerwithspringmuisc_mongo_net
+
+volumes:
+  # default dir /var/lib/docker/volumes
+  javatmp:
+
+networks:
+  dockerwithspringmuisc_mongo_net:
+    external: true

@@ -1,0 +1,23 @@
+version: '3.6'
+# Deploys Spring Music app with in-memory persistence
+#
+# usage:
+# sudo docker-compose build
+# sudo docker-compose up
+
+services:
+
+  my-springmusic:
+    image: my-springmusic
+    build: . # Dockerfile 위치
+    ports:
+      - 8080:8080
+    environment:
+      - example=my value # 환경변수 지정 예시
+    volumes:
+      - javatmp:/tmp # 지금 컴퓨터 /var/lib/docker/volumes 를 도커 컨테이너 안 tmp 매핑
+
+
+volumes:
+  # default dir /var/lib/docker/volumes
+  javatmp:
